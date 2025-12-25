@@ -7,3 +7,8 @@ uvicorn
 httpx
 python-dotenv
 pytest
+pymupdf
+pypdf
+langchain-community
+qdrant-client
+mistralai
