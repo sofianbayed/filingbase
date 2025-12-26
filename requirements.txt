@@ -12,3 +12,6 @@ pypdf
 langchain-community
 qdrant-client
 mistralai
+pandas
+tabulate
+lxml

@@ -1,4 +1,5 @@
 import os
+import hashlib
 from urllib.parse import urlparse
 from pathlib import Path
 from abc import ABC, abstractmethod
@@ -67,3 +68,7 @@ class BaseDocumentParser(ABC):
             return result.scheme in ('http', 'https')
         except Exception:
             return False
+
+    @staticmethod
+    def _generate_hash(content: bytes) -> str:
+        return hashlib.sha256(content).hexdigest()
