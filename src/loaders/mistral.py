@@ -35,11 +35,9 @@ Surrounding context:
 Respond with only the caption, no preamble.
 """
 
-
-class TableDescription(BaseModel):
+class TableDescriptionModel(BaseModel):
     """Schema for the table description"""
     description: str
-
 
 class MistralDocumentLoader(BaseDocumentLoader):
 
@@ -146,7 +144,7 @@ class MistralDocumentLoader(BaseDocumentLoader):
             result = await self._describe_table(table, context)
             table.description = result["description"]
 
-    async def _describe_table(self, table: Table, context: str) -> TableDescription:
+    async def _describe_table(self, table: Table, context: str) -> TableDescriptionModel:
         messages = [
             HumanMessage(
                 content=TABLE_DESCRIPTION_PROMPT.format(
@@ -156,5 +154,5 @@ class MistralDocumentLoader(BaseDocumentLoader):
             )
         ]
 
-        response = await self.llm.with_structured_output(TableDescription).ainvoke(messages)
+        response = await self.llm.with_structured_output(TableDescriptionModel).ainvoke(messages)
         return response.model_dump()
